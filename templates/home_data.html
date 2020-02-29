@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+  <title>Home Data</title>
+  <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('d81c82457c99baa54a66', {
+      cluster: 'ap2',
+      forceTLS: true
+    });
+    {% for sensor in all_sensor %}
+    var channel = pusher.subscribe('{{sensor.channel}}');
+    channel.bind('my-event', function(data) {
+      div = document.getElementById("my_div");
+      field1 = document.getElementById("nr{{sensor.id}}")
+      field2 = document.getElementById("temp{{sensor.id}}")
+      field4 = document.getElementById("tds{{sensor.id}}")
+      field3 = document.getElementById("turbidity{{sensor.id}}")
+      date = document.getElementById('fetch{{sensor.id}}')
+      field1.textContent = data['NOx']
+      field2.textContent = data['temp']
+      field3.textContent = data['TDS']
+      field4.textContent = data['turbidity']
+      date.textContent = data['fetched']
+      div.innerHTML += JSON.stringify(data);
+    });
+    {% endfor %}
+  </script>
+</head>
+<body>
+
+  <div id="my_div">Hello</div>
+  <h1>Pusher Test</h1>
+  <table style="border: 3px black solid;">
+      <tr>
+      <th>Location</th>
+      <th>Nitrate</th>
+      <th>Temperature</th>
+      <th>Total Dissolved Solid</th>
+      <th>Turbidity</th>
+      <th>Activity</th>
+      <th>Last Fetched</th>
+    </tr>
+    
+    {% for sensor in all_sensor %}
+        <tr>
+        <td>{{sensor.location_name}}</td>
+        <td id="nr{{sensor.id}}"></td>
+        <td id="temp{{sensor.id}}"></td>
+        <td id="tds{{sensor.id}}"></td>
+        <td id="turbidity{{sensor.id}}"></td>
+        <td id="activity{{sensor.id}}">True</td>
+        <td id="fetch{{sensor.id}}">Last Fetched</td>
+        </tr>
+    {% endfor %}
+        
+  </table>
+</body>

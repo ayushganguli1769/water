@@ -1,0 +1,5 @@
+<form action="{% url 'iotData:test1' %}" method="POST">
+    {% csrf_token %}
+<input type="text" name="val" placeholder="value">
+<button name="test1">SUBMIT</button>
+</form>
