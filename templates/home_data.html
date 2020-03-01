@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <head>
   <title>Home Data</title>
+  <style>
+    .bgcol {
+      background: #1e6cafff;
+    }
+    .f {
+      font-size: 18px;
+    }
+  </style>
   <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
   <script>
 
@@ -29,12 +37,68 @@
     });
     {% endfor %}
   </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="bgcol">
 
-  <div id="my_div">Hello</div>
-  <h1>Pusher Test</h1>
-  <table style="border: 3px black solid;">
+  <h1 class="text-center" style="color:yellow">Water Quality Test</h1>
+  <br/>
+  <br/>
+  <form class="container">
+    <!-- <h1>Aryan</h1>
+      <div class="form-row justify-content-center">
+          <div class="form-group col-md-3">
+              <div class="input-group mx-auto mb-3">
+                  <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="submit" name="action" value="<"><span class="ti-arrow-circle-left"></span></button>
+                  </div>
+                  <input class="form-control" type="text" size="2" name="listeanzahl" value="10" style="text-align:center">
+                  <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit" name="action" value=">"><span class="ti-arrow-circle-right"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+  
+      <!-- <div class="form-row">
+          <div class="form-group col-md-3 mx-auto">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="submit" name="action" value="<"><span class="ti-arrow-circle-left"></span></button>
+                  </div>
+                  <input class="form-control" type="text" size="2" name="listeanzahl" value="10" style="text-align:center">
+                  <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit" name="action" value=">"><span class="ti-arrow-circle-right"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+  
+      <div class="form-row">
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="Your Amount" aria-describedby="basic-addon1">
+          </div>
+      </div>
+      <div class="form-row">
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="Your Amount" aria-describedby="basic-addon1">
+          </div>
+      </div>
+      <div class="form-row">
+        <h1 class="f">TDS Level</h1>
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="TDS Level" aria-describedby="basic-addon1">
+          </div>
+      </div>
+  
+  </form>
+  <br/><br/><br/>
+  <div class="table-responsive">
+  <table class="table table-hover" style="border: 3px black solid;background: white;">
       <tr>
       <th>Location</th>
       <th>Nitrate</th>
@@ -58,4 +122,5 @@
     {% endfor %}
         
   </table>
+</div>
 </body>
