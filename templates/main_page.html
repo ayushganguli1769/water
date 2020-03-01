@@ -1,6 +1,8 @@
-<form action="{% url 'iotData:add_sensor' %}" method="POST">
-    {% csrf_token %}
+<body bgcolor="#1e6cafff" style="text-align: center;">
+<form action="{% url 'iotData:add_sensor' %}" method="POST" style="padding:25vh">
+    <h1 style="display:none">{% csrf_token %}</h1>
     <input type="text" name="url" placeholder="API key of sensor">
     <input type="text" name="location" placeholder="location">
-    <button name="add">SUBMIT</button>
+    <button name="add">Submit</button>
 </form>
+</body>
