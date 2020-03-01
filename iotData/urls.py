@@ -22,6 +22,8 @@ urlpatterns = [
     path('add_sensor/',views.add_sensor,name="add_sensor"),
     path('main_page/',views.main_page,name="main_page"),#main page being used to add sensors
     path('home_data/',views.home_data,name = "home_data"),
+    #path('graph/<int:sensor_id>/',views.get_graph_reading,name="graph"),
+    path('graph/<int:sensor_id>',views.get_graph_reading, name="graph"),
 
 ]
 

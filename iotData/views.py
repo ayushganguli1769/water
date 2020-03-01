@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import pusher
 from django.http import HttpResponse
-from .models import Sensor
+from .models import Sensor, Reading
 from .tasks import my_reading_feed
 pusher_client = pusher.Pusher(
   app_id='955817',
@@ -35,4 +35,22 @@ def add_sensor(request):
 def home_data(request):
     all_sensor = Sensor.objects.all()
     return render(request,'home_data.html',{'all_sensor':all_sensor})
+def get_graph_reading(request,sensor_id):
+    sen = Sensor.objects.get(id = sensor_id)
+    all_reading = Reading.objects.filter(sensor = sen).order_by('-pk')[:50]
+    coordinates = []
+    for reading in all_reading:
+        my_date_time = ""
+        x = reading.time 
+        print(x)
+        my_date = str(x.date())
+        temp = str(x.time())
+        (my_time,y) = temp.split('.')
+        my_date_time = my_date + " " + my_time
+        print(my_date_time)
+        print(reading.field1)
+        coordinates.append({'date_time':my_date_time,'field':reading.field2})
+    print(coordinates)
+    return render(request,'graph.html',{'coordinates':coordinates})
+
 # Create your views here.

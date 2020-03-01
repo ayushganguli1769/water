@@ -8,9 +8,10 @@ class Sensor(models.Model):
         return "Sensor: " + self.location_name
 class Reading(models.Model):
     sensor = models.ForeignKey(Sensor,on_delete= models.CASCADE, related_name="read")
-    field1 = models.IntegerField(default= 0)
-    field2 = models.IntegerField(default= 0)
-    field3 = models.IntegerField(default= 0)
-    field4 = models.IntegerField(default= 0)
+    field1 = models.FloatField(default= 0)
+    field2 = models.FloatField(default= 0)
+    field3 = models.FloatField(default= 0)
+    field4 = models.FloatField(default= 0)
+    time = models.DateTimeField(auto_now_add= True)
     def __str__(self):
         return "Reading from " + self.sensor.location_name

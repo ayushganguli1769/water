@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'water.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'robo2',
+        'NAME': 'robo3',
         'USER' : 'postgres',
         'PASSWORD': '1234',
         'HOST' : 'localhost',
