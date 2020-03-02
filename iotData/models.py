@@ -12,6 +12,8 @@ class Reading(models.Model):
     field2 = models.FloatField(default= 0)
     field3 = models.FloatField(default= 0)
     field4 = models.FloatField(default= 0)
+    field5 = models.FloatField(default= 0)
+    wqi = models.FloatField(default= 0)
     time = models.DateTimeField(auto_now_add= True)
     def __str__(self):
         return "Reading from " + self.sensor.location_name

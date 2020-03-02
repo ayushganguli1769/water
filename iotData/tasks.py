@@ -19,7 +19,6 @@ pusher_client = pusher.Pusher(
   cluster='ap2',
   ssl=True
 )
-"""
 ####wqi calculation function
 def PH(argument): 
     switcher = { 
@@ -37,7 +36,7 @@ def PH(argument):
         12 : 3,
         13 : 0, 
     } 
-    return switcher.get(argument, "nothing") 
+    return switcher.get(argument, 0) 
 def Turbidity(argument): 
     switcher = { 
         1: 96, 
@@ -81,7 +80,7 @@ def Turbidity(argument):
         39:46,
         40:45,
         41:44,
-        42:44        
+        42:44 ,       
         44:44,
         45:43,
         46:41,
@@ -111,40 +110,118 @@ def Turbidity(argument):
         70:29,
         71:29,
         72:28,
-        73:,
-        74:,
-        75:,
-        76:,
-        77:,
-        78:,
-        79:,
-        80:,
-        81:,
-        82:,
-        83:,
-        84:,
-        85:,
-        86:,
-        87:,
-        88:,
-        89:,
-        90:,
-        91:,
-        92:,
-        93:,
-        94:,
-        95:,
-        96:,
-        97:,
-        98:,
-        99:,
-        100:,
-        101:
+        73:28,
+        74:27,
+        75:27,
+        76:26,
+        77:26,
+        78:26,
+        79:25,
+        80:25,
+        81:25,
+        82:24,
+        83:24,
+        84:24,
+        85:24,
+        86:23,
+        87:23,
+        88:23,
+        89:22,
+        90:22,
+        91:22,
+        92:21,
+        93:21,
+        94:20,
+        95:19,
+        96:19,
+        97:19,
+        98:18,
+        99:18,
+        100:18,
+        101:17,
 
 
     } 
-    return switcher.get(argument, "nothing") 
-"""
+    return switcher.get(argument, 0)
+def NO(argument): 
+    switcher = { 
+        0: 97,
+        1: 96, 
+        2: 95,
+        3 : 90,
+        4 : 70,
+        5 : 65,
+        6 : 60,
+        7 : 58,
+        8 : 56,
+        9 : 53,
+        10: 51,
+        11 : 49,
+        12 : 48,
+        13: 46,
+        14: 45,
+        15:43,
+        16 : 42,
+        17 :40,
+        18: 39,
+        19: 38,
+        20: 37,
+        21: 36,
+        22 : 36,
+        23: 34,
+        24: 33,
+        25: 32,
+        26 :31,
+        27: 30,
+        28: 29,
+        29: 28,
+        30: 27,
+        31: 26,
+        32:25,
+        33: 24,
+        34: 23,
+        35: 22,
+        36:21,
+        37:20,
+        38:19,
+        39:18,
+        40:18,
+        41:17,
+        42:16,        
+        44:15,
+        45:15,
+        46:14,
+        47:13,
+        48:12,
+        49:12,
+        50:10,
+        51:10,
+        52:9,
+        53:9,
+        54:8,
+        55:8,
+        56:8,
+        57:7,
+        58:7,
+        59:7,
+        60:7,
+        61:7,
+        62:6,
+        63:6,
+        64:6,
+        65:6,
+        66:5,
+        67:5,
+        68:5,
+        69:5,
+        70:4,
+        71:4,
+        72:4,
+        73:4,
+        74:4,
+
+    } 
+    return switcher.get(argument, 0) 
 @background(schedule=1)
 def my_reading_feed(cur_sensor_id):
     global db
@@ -159,8 +236,21 @@ def my_reading_feed(cur_sensor_id):
         print(b)
         x = str(b['temp'])
         fetched = datetime.datetime.now()
-        pusher_client.trigger(cur_sensor.channel, 'my-event', {'NOx':b['NOx'],'temp':b['temp'],'TDS':b['TDS'],'turbidity':b['turbidity'],'fetched':str(fetched) })
-        my_reading = Reading(sensor = cur_sensor,field1 = b['NOx'],field2=b['temp'],field3=b['TDS'],field4 =b['turbidity']  )
+        print("PH",b['pH'],0.11)
+        print("NOx",(b['NOx']*100))
+        e = round(float(b['pH']))
+        f = round(float(b['NOx'])*100)
+        print(e,f)
+        p = PH(e)
+        q= NO(f)
+        print(p,q,"my numbers")
+        my_wqi = (p* 0.11 + q* 0.1 + 0.1 * 81)* (0.67/0.31)
+        if my_wqi >60:
+            my_wqi = my_wqi
+        else:
+            my_wqi = my_wqi + 35
+        pusher_client.trigger(cur_sensor.channel, 'my-event', {'NOx':b['NOx'],'temp':b['temp'],'TDS':b['TDS'],'turbidity':b['turbidity'],'pH':b['pH'],'fetched':str(fetched),'wqi':my_wqi })
+        my_reading = Reading(sensor = cur_sensor,field1 = b['NOx'],field2=b['temp'],field3=b['TDS'],field4 =b['turbidity'],field5= b['pH'], wqi = my_wqi  )
         my_reading.save()
         print(b['temp'])
     else:

@@ -1,6 +1,19 @@
-<form action="{% url 'iotData:add_sensor' %}" method="POST">
-    {% csrf_token %}
-    <input type="text" name="url" placeholder="API key of sensor">
-    <input type="text" name="location" placeholder="location">
-    <button name="add">SUBMIT</button>
-</form>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<body style="text-align: center;background-color: #1e6cafff;">
+    <div class="text-center" style="color: white;padding:10vh">
+       <a class="btn-danger btn-lg btn text-center">Add New Sensor</a>
+       &nbsp;
+       <a class="btn-success btn-lg btn text-center" href="/home_data/">View Data</a>
+    </div>
+    <form action="{% url 'iotData:add_sensor' %}" method="POST">
+        <h1 style="display:none">{% csrf_token %}</h1>
+        <input type="text" name="url" placeholder="API Key of Sensor">
+        <input type="text" name="location" placeholder="Location">
+        <button class="btn-secondary" name="add">Submit</button>
+    </form>
+    </body>

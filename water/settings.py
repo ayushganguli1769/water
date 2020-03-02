@@ -25,8 +25,8 @@ SECRET_KEY = 'h-nbj()7c-v*%ul8=l%*@bx8t+m3rc2531ws_ab38-1*n0hk%d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#ALLOWED_HOSTS = ['192.168.1.101']
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'water.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'robo3',
+        'NAME': 'robox3',
         'USER' : 'postgres',
         'PASSWORD': '1234',
         'HOST' : 'localhost',

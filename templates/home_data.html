@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <head>
   <title>Home Data</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .bgcol {
+      background: #1e6cafff;
+    }
+    .f {
+      font-size: 18px;
+    }
+  </style>
   <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
   <script>
 
@@ -19,43 +33,114 @@
       field2 = document.getElementById("temp{{sensor.id}}")
       field4 = document.getElementById("tds{{sensor.id}}")
       field3 = document.getElementById("turbidity{{sensor.id}}")
+      field5 = document.getElementById("pH{{sensor.id}}")
+      wqi = document.getElementById('wqi{{sensor.id}}')
       date = document.getElementById('fetch{{sensor.id}}')
       field1.textContent = data['NOx']
       field2.textContent = data['temp']
-      field3.textContent = data['TDS']
-      field4.textContent = data['turbidity']
+      field3.textContent = data['turbidity']
+      field4.textContent = data['TDS'] 
+      field5.textContent = data['pH']
       date.textContent = data['fetched']
+      wqi.textContent = data['wqi']
       div.innerHTML += JSON.stringify(data);
     });
     {% endfor %}
   </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="text-align: center;background-color: #1e6cafff;">
+  <div class="text-center" style="color: white;padding:10vh">
+    <a class="btn-success btn-lg btn text-center" href="/main_page/">Add New Sensor</a>
+    &nbsp;
+    <a class="btn-danger btn-lg btn text-center">View Data</a>
+ </div>
 
-  <div id="my_div">Hello</div>
-  <h1>Pusher Test</h1>
-  <table style="border: 3px black solid;">
+  <h1 class="text-center" style="color:yellow">Water Quality Test</h1>
+  <br/>
+  <br/>
+  <!-- <form class="container">
+    <!-- <h1>Aryan</h1>
+      <div class="form-row justify-content-center">
+          <div class="form-group col-md-3">
+              <div class="input-group mx-auto mb-3">
+                  <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="submit" name="action" value="<"><span class="ti-arrow-circle-left"></span></button>
+                  </div>
+                  <input class="form-control" type="text" size="2" name="listeanzahl" value="10" style="text-align:center">
+                  <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit" name="action" value=">"><span class="ti-arrow-circle-right"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+  
+      <!-- <div class="form-row">
+          <div class="form-group col-md-3 mx-auto">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="submit" name="action" value="<"><span class="ti-arrow-circle-left"></span></button>
+                  </div>
+                  <input class="form-control" type="text" size="2" name="listeanzahl" value="10" style="text-align:center">
+                  <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit" name="action" value=">"><span class="ti-arrow-circle-right"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+<!--
+      <div class="form-row">
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="Your Amount" aria-describedby="basic-addon1">
+          </div>
+      </div>
+      <div class="form-row">
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="Your Amount" aria-describedby="basic-addon1">
+          </div>
+      </div>
+      <div class="form-row">
+        <h1 class="f">TDS Level</h1>
+          <div class="input-group input-group-lg col-md-3 mx-auto">
+              <input type="text" class="form-control" placeholder="TDS Level" aria-describedby="basic-addon1">
+          </div>
+      </div>
+  
+  </form> -->
+  <br/><br/><br/>
+  <div class="table-responsive">
+  <table class="table table-hover" style="border: 3px black solid;background: white;">
       <tr>
       <th>Location</th>
       <th>Nitrate</th>
       <th>Temperature</th>
       <th>Total Dissolved Solid</th>
       <th>Turbidity</th>
+      <th>pH</th>
+      <th>WQI</th>
       <th>Activity</th>
       <th>Last Fetched</th>
     </tr>
     
     {% for sensor in all_sensor %}
         <tr>
-        <td>{{sensor.location_name}}</td>
+        <td><a href="/graph/{{sensor.id}}">{{sensor.location_name}}</a></td>
         <td id="nr{{sensor.id}}"></td>
         <td id="temp{{sensor.id}}"></td>
         <td id="tds{{sensor.id}}"></td>
         <td id="turbidity{{sensor.id}}"></td>
+        
+        <td id="pH{{sensor.id}}"></td>
+        <td id="wqi{{sensor.id}}"></td>
         <td id="activity{{sensor.id}}">True</td>
         <td id="fetch{{sensor.id}}">Last Fetched</td>
         </tr>
     {% endfor %}
         
   </table>
+</div>
 </body>

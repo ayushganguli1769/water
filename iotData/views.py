@@ -49,7 +49,7 @@ def get_graph_reading(request,sensor_id):
         my_date_time = my_date + " " + my_time
         print(my_date_time)
         print(reading.field1)
-        coordinates.append({'date_time':my_date_time,'field':reading.field2})
+        coordinates.append({'date_time':my_date_time,'field':reading.wqi})
     print(coordinates)
     return render(request,'graph.html',{'coordinates':coordinates})
 
