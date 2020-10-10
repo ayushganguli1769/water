@@ -1,8 +1,39 @@
-<body bgcolor="#1e6cafff" style="text-align: center;">
-<form action="{% url 'iotData:add_sensor' %}" method="POST" style="padding:25vh">
-    <h1 style="display:none">{% csrf_token %}</h1>
-    <input type="text" name="url" placeholder="API key of sensor">
-    <input type="text" name="location" placeholder="location">
-    <button name="add">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Water Quality Test</title>
+</head>
+<body>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <div>
+            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg" alt="Workflow">
+            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+              Sign in to your sensor
+            </h2>
+          </div>
+      <form class="mt-8" action="{% url 'iotData:add_sensor' %}" method="POST">
+        <h1 style="display:none">{% csrf_token %}</h1>
+        <div class="rounded-md shadow-sm">
+          <div>
+            <input aria-label="url" type="text" name="url" placeholder="API Key of Sensor" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5">
+          </div>
+          <br/>
+          <div class="-mt-px">
+            <input aria-label="location" type="text" name="location" placeholder="Location" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5">
+          </div>
+        </div>
+  
+        <div class="mt-6">
+          <button name="add" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
+</html>    
