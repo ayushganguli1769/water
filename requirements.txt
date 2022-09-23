@@ -23,7 +23,7 @@ httplib2==0.17.0
 idna==2.9
 msgpack==1.0.0
 ndg-httpsclient==0.5.1
-protobuf==3.11.3
+protobuf==3.18.3
 psycopg2==2.8.4
 pusher==2.1.4
 pyasn1==0.4.8
